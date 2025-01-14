@@ -1,0 +1,9 @@
+config.yaml
+apiEx.py
+meu_modelo.keras
+testflask.py
+objects/*
+!objects/.gitkeep
+Exemplo
+novadrive
+__pycache__
