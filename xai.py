@@ -1,5 +1,4 @@
 import pandas as pd
-#from datetime import datetime
 import numpy as np
 import random as python_random
 import joblib  # Para salvar os objetos
@@ -100,18 +99,6 @@ X_test = save_encoders(
     X_test,
     ["profissao", "tiporesidencia", "escolaridade", "score", "estadocivil", "produto"],
 )
-
-"""# Seleção de Atributos
-model = RandomForestClassifier()
-# instancia  RFE
-selector = RFE(model, n_features_to_select=10, step=1)
-selector = selector.fit(X_train, y_train)
-# Transformação dos dados
-X_train = selector.transform(X_train)
-X_test = selector.transform(X_test)
-
-joblib.dump(selector, "./objects/selector.joblib")
-"""
 
 model = tf.keras.Sequential(
     [

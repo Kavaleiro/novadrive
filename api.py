@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model 
 import pandas as pd 
 import joblib
-from utils import *  # noqa: F403
+from utils import *
 
 
 app = Flask(__name__)

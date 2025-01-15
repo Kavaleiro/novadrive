@@ -45,13 +45,6 @@ def substitui_nulos(df):  # criando um função que irá substituir os nulos. Mo
             df[coluna].fillna(mediana)
 
 # Erros de Entrada(digitação, sistema, etc..)
-"""def corrigir_erros_digitacao(df, coluna, lista_valida):
-    for i, valor in enumerate(df[coluna]):
-        valor_str = str(valor) if pd.notnull(valor) else valor
-
-        if valor_str not in lista_valida and pd.notnull(valor_str):
-            correcao = process.extractOne(valor_str, lista_valida)[0]
-            df.at[i, coluna] = correcao"""
 def corrigir_erros_digitacao(df, coluna, lista_valida):
     # Itera sobre cada valor da coluna
     for i, valor in enumerate(df[coluna]):
@@ -84,14 +77,11 @@ def save_encoders(df, nome_colunas):
     for nome_coluna in nome_colunas:
         label_encoder = LabelEncoder()
         df[nome_coluna] = label_encoder.fit_transform(df[nome_coluna])
-        joblib.dump(label_encoder, f"./objects/labelencoder{nome_coluna}.joblib")#Errei no Nome LabelEncoder
+        joblib.dump(label_encoder, f"./objects/labelencoder{nome_coluna}.joblib")
     
     return df
 
-
 # Engenharia de Atributos
-# df["proporcaosolicitadototal"] = df["valorsolicitado"] / df["valortotalbem"]
-
 def load_scalers(df, nome_colunas):
     for nome_coluna in nome_colunas:
         nome_arquivo_scaler = f"./objects/scaler{nome_coluna}.joblib"
@@ -105,22 +95,3 @@ def load_encoders(df, nome_colunas):
         encoder = joblib.load(nome_arquivo_encoders)
         df[nome_coluna] = encoder.transform(df[nome_coluna])
     return df
-
-"""def load_encoders(df, nome_colunas):
-    for nome_coluna in nome_colunas:
-        nome_arquivo_encoders = f"./objects/labelencoder{nome_coluna}.joblib"
-        encoder = joblib.load(nome_arquivo_encoders)
-
-        # Garantir que valores desconhecidos sejam tratados
-        df[nome_coluna] = df[nome_coluna].apply(lambda x: x if x in encoder.classes_ else "Desconhecido")
-
-        # Adicionar a categoria 'Desconhecido' ao encoder, se necessário
-        if "Desconhecido" not in encoder.classes_:
-            encoder.classes_ = np.append(encoder.classes_, "Desconhecido")
-
-        # Transformar os valores
-        df[nome_coluna] = encoder.transform(df[nome_coluna])
-
-    return df
-
-"""
